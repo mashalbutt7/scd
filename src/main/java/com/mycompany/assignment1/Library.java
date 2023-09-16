@@ -219,14 +219,15 @@ class Library
     public void displayallbooks()
     {
         
-        for (int i = 0; i < itemsList.size(); i++) {
+        for (int i = 0; i < itemsList.size(); i++) 
+        {
         Item item = itemsList.get(i);
         item.displayInfo();
     }
     }
-
-   
-    public void displayonebook(int id)
+    
+    
+ public void displayonebook(int id)
     {
         for(int i=0;i<itemsList.size();i++)
         {
@@ -241,6 +242,12 @@ class Library
         
              
     }
+    public void displayonebook(Item i)
+    {
+        i.displayInfo();
+    }
+   
+   
     public void loadfromfile()
     {
         {

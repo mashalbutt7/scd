@@ -64,8 +64,28 @@ public class Assignment1 {
             case 5:
         {
             System.out.println("enter the id you want to display:");
-           int ss=obj.nextInt();
-            lb.displayonebook(ss);
+         
+             int ed=obj.nextInt();
+             Item Display = null;
+    for (int i=0;i<lb.itemsList.size();i++)
+       {
+       
+         Item item = lb.itemsList.get(i);
+        if (item.idc == ed)
+        {
+            Display = item;
+            break; 
+        }
+    }
+    if (Display != null)
+    {
+        lb.displayonebook(Display);
+    } 
+    
+    else 
+    {
+        System.out.println("Item with ID " + Display + " not found.");
+    }
             break;
            
    }
