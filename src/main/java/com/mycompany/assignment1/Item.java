@@ -9,7 +9,7 @@ package com.mycompany.assignment1;
  * @author mashalbutt
  */
 
- class Item 
+ class Item implements Configuration
 {
    public String title;
    private boolean isBorrowed;
@@ -57,6 +57,8 @@ package com.mycompany.assignment1;
    {
        return title;
    }
+   
+   @Override
    public void displayInfo()
    {
        
