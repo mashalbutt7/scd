@@ -16,9 +16,9 @@ class magazine extends Item
     
     private String publisher;
     private List<String>authorsList=new ArrayList<>();
-    magazine(String t,String p,List<String>a)
+    magazine(String t,String p,List<String>a,int pc)
     {
-       super(t);
+       super(t,pc);
        publisher=p;
        authorsList=a;
     }

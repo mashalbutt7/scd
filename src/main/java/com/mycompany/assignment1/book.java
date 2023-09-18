@@ -13,9 +13,9 @@ class Book extends Item
    
     private String author;
     private int year;
-    Book(String t,String a,int y)
+    Book(String t,String a,int y,int pc)
     {
-         super(t);
+         super(t,pc);
          this. author=a;
          this. year=y;
         

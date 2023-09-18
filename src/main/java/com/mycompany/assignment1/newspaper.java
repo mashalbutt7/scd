@@ -17,9 +17,10 @@ class newspaper extends Item
    private String publisher;
    
 
-   newspaper(String t,String p,Date d)
+   newspaper(String t,String p,Date d,int pc)
    {
-       super(t);
+       super(t,pc);
+       
        publisher=p;
        date=d;
    }

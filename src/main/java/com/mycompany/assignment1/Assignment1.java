@@ -17,6 +17,10 @@ public class Assignment1 {
         Library lb=new Library();
         System.out.println("loaded from file");
         lb.loadfromfile();
+        int s=0;
+      
+       do
+       {
         System.out.println();
         System.out.println();
         System.out.println();
@@ -26,9 +30,14 @@ public class Assignment1 {
         System.out.println("3.  Delete Book");
         System.out.println("4.  View All");
         System.out.println("5.  View Book By ID");
-        System.out.println("6.  Exit");
+        System.out.println("6.  Hot Picks");
+         System.out.println("7. Borrow Items");
+          System.out.println("8.  Display the borrowers");
+           System.out.println("9.  Exit");
         System.out.println("Enter your choice:");
-        int s=obj.nextInt();
+        s=  obj.nextInt();
+       
+     
         switch(s)
           
         {
@@ -90,9 +99,25 @@ public class Assignment1 {
            
    }
             case 6:
-         {  
-            break;
-         }
+            {
+                System.out.println("Hot Picks:");
+                lb.displayHotPicks();
+                break;
+            }
+            case 7:
+            {  
+              lb.borrowItem();
+               break;
+           
+            }
+            case 8:
+            {
+                lb.displayBorrowers();
+            }
+            case 9:
+            {
+                break;
+            }
             default:
             {
                  System.out.println("Invalid choice. Please try again.");
@@ -100,6 +125,10 @@ public class Assignment1 {
             }
                
         }
-        
+      
+         
+         
+
+ }while(s!=9);
     }
 }

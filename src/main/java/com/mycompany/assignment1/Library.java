@@ -11,7 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+
 import java.util.List;
+
 import java.util.Scanner;
 
 /**
@@ -23,11 +25,142 @@ class Library
   
     
  List<Item> itemsList=new ArrayList<>();
+ private List<Borrower> borrowers = new ArrayList<>();
+  private Item borrowedItem;
+
    
     Library()
     {
       // itemsList =new ArrayList<>();
+        borrowedItem=null;
     }
+    public Item findItemByTitle(String title) 
+    {
+        for (int i=0;i<itemsList.size();i++) 
+        {
+            Item it=itemsList.get(i);
+            if (it.gettitle().equalsIgnoreCase(title)) 
+            {
+                return it;
+            }
+        }
+        return null;
+    }
+    public Borrower findBorrowerByName(String name)
+    {
+        for (int i=0;i<borrowers.size();i++)
+            
+        {
+            Borrower bb=borrowers.get(i);
+            if (bb.getBorrower().equalsIgnoreCase(name)) 
+            {
+                return bb;
+            }
+        }
+        return null;
+    }
+  public void setBorrowedItem(Item i)
+    {
+        borrowedItem = i;
+    }
+    public Item getborroweditem()
+    {
+        return borrowedItem;
+    }
+
+public void borrowItem()
+{
+    Scanner haha=new Scanner(System.in);
+      
+      System.out.print("Enter borrower name: ");
+       String borrowerName= haha.nextLine();
+        addBorrower(borrowerName);
+       System.out.print("Enter item title: ");
+       String itemTitle = haha.nextLine();
+        Borrower borrower = findBorrowerByName(borrowerName);
+        Item item = findItemByTitle(itemTitle);
+     
+         System.out.println(item);
+             if (item == null) 
+        {
+            System.out.println("Item not found.");
+            return;
+        }
+       
+        if(item.getisborrowed())
+        {
+            System.out.println("Book already borrowed");
+        }
+        else
+        {
+        if (borrower == null) 
+        {
+            System.out.println("Borrower not found.");
+            return;
+        }
+       
+   
+      
+        else 
+        {
+            System.out.println("Borrowed Successfully");
+            item.setisborrowed(true);
+            item.incrementPopularityCount();
+            setBorrowedItem(item);
+        System.out.println(borrower.getBorrower() + " borrowed " + item.gettitle());
+        }
+        
+        }
+    }
+
+    public void displayHotPicks() 
+    {
+       
+      for (int i = 0; i < itemsList.size() - 1; i++) 
+      {
+         for (int j = 0; j < itemsList.size() - i - 1; j++)
+       {
+        Item itemm = itemsList.get(j);
+        Item itemmm = itemsList.get(j + 1);
+        if (itemm.getPopularityCount() < itemmm.getPopularityCount())
+        {
+            Item temp = itemsList.get(j);
+            itemsList.set(j, itemsList.get(j + 1));
+            itemsList.set(j + 1, temp);
+        }
+    }
+}
+System.out.println("Hot Picks by popularity:");
+
+for (int i = 0; i < itemsList.size(); i++) 
+{
+    Item item = itemsList.get(i);
+    System.out.println("Title: " + item.gettitle() + ", Popularity Count: " + item.getPopularityCount());
+}
+
+    }
+
+    public void displayBorrowers()
+    {
+        System.out.println("Borrowers and Borrowed Items:");
+       for (int i = 0; i < borrowers.size(); i++) 
+       {
+          Borrower borrower = borrowers.get(i);
+         Item borrowedItemm = getborroweditem();
+         if (borrowedItem != null)
+         {
+        System.out.println("id " + borrower.getId() + "Borrower: " + borrower.getBorrower() 
+         + ", Borrowed Item: " + borrowedItemm.gettitle());
+    }
+}
+
+    }
+    public void addBorrower(String n)
+    {
+       Borrower bb = new Borrower(n);
+        borrowers.add(bb);
+    }
+   
     public void addItem()
     { 
         Scanner objo=new Scanner(System.in);
@@ -41,9 +174,9 @@ class Library
                 String t=objo.nextLine();
                 System.out.println("enter the author of book:");
                 String a=objo.nextLine();
-                 System.out.println("enter the year of book:");
+                System.out.println("enter the year of book:");
                 int y=objo.nextInt();
-                Book bb=new Book(t,a,y);
+                Book bb=new Book(t,a,y,0);
                 itemsList.add(bb);
                 break;
             case 2:
@@ -69,7 +202,7 @@ class Library
                }
                 System.out.println("enter the publisher company of the magazine:");
                 String pc=objo.nextLine();
-                magazine mm=new magazine(mt,pc,authorss);
+                magazine mm=new magazine(mt,pc,authorss,0);
                 itemsList.add(mm);
                 
                
@@ -93,7 +226,7 @@ class Library
             System.err.println("Invalid date format. Please use dd-MM-yyyy.");
         }
                
-                newspaper nn=new newspaper(nt,am,date);
+                newspaper nn=new newspaper(nt,am,date,0);
                 itemsList.add(nn);
                 break;
             default:
@@ -122,7 +255,7 @@ class Library
                 System.out.println("Enter new title:");
                        item.settitle(input.nextLine());
                 Book book = (Book) item; // Cast to Book
-                System.out.println("Enter new author and press . to exit :");
+                System.out.println("Enter new author :");
                 book.setAuthor(input.nextLine());
                 System.out.println("Enter new year:");
                 book.setYear(input.nextInt());
@@ -138,8 +271,8 @@ class Library
                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
                   System.out.print("Enter a date (dd-MM-yyyy): ");
-        String userInput = input.nextLine();
-  Date date=null;
+            String userInput = input.nextLine();
+            Date date=null;
   
         try {
              date = dateFormat.parse(userInput);
@@ -159,7 +292,7 @@ class Library
                magazine m=(magazine)item;
                  System.out.println("Enter new title:");
                        item.settitle(input.nextLine());
-                 System.out.println("Enter new authors:");
+                 System.out.println("Enter new authors and press . to exit:");
               List<String>authorss=new ArrayList();
                       
                while(true)
@@ -211,14 +344,23 @@ class Library
     System.out.println("No item with ID " + idd + " found.");
     return false;
 }
-
-  
-    
-    
-
     public void displayallbooks()
     {
         
+         for (int i = 0; i < itemsList.size() - 1; i++) 
+      {
+         for (int j = 0; j < itemsList.size() - i - 1; j++)
+       {
+        Item itemm = itemsList.get(j);
+        Item itemmm = itemsList.get(j + 1);
+        if (itemm.idc > itemmm.idc)
+        {
+            Item temp = itemsList.get(j);
+            itemsList.set(j, itemsList.get(j + 1));
+            itemsList.set(j + 1, temp);
+        }
+    }
+      }
         for (int i = 0; i < itemsList.size(); i++) 
         {
         Item item = itemsList.get(i);
@@ -269,8 +411,8 @@ class Library
                 {
                     String author=p[2];
                     int year=Integer.parseInt(p[3]);
-                   
-                    Book b=new Book(title,author,year);
+                    int pc=Integer.parseInt(p[4]);
+                    Book b=new Book(title,author,year,pc);
                     itemsList.add(b);
                     
                 }
@@ -319,7 +461,8 @@ for (int i = 0; i < result.length(); i++)
 }
        
                  String pu=p[count+2];
-                 magazine m=new magazine(title,pu,author);
+                 int pr=Integer.parseInt(p[count+3]);
+                 magazine m=new magazine(title,pu,author,pr);
                  itemsList.add(m);
                  
               }
@@ -335,7 +478,7 @@ for (int i = 0; i < result.length(); i++)
             // Parse the string into a Date object
             Date dd = dateFormat.parse(d);
              
-            // Now you can use the 'date' object as a Date
+          
            hi=dd;
         } 
    catch (ParseException e) 
@@ -343,36 +486,28 @@ for (int i = 0; i < result.length(); i++)
             // Handle parsing exception
             e.printStackTrace();
         }
-                   
-                    newspaper n=new newspaper(title,publisher,hi);
+                    int hii=Integer.parseInt(p[4]);
+                    newspaper n=new newspaper(title,publisher,hi,hii);
                     itemsList.add(n);
                 }
             }
            
 
-            // Close the Scanner to release resources
             file.close();
         } catch (FileNotFoundException e) 
         {
-            // Handle the case where the file is not found
+           
             System.err.println("File not found: " + filePath);
         }
         catch (NumberFormatException g) 
         {
-            // Handle the case where the number is not found
+            
             System.err.println("");
         }
     }
    
     }
-    public void viewborrowerslist()
-    {
-        
-    }
-    public boolean borrowItem()
-    {
-        return true;
-    }
+   
     
 }
 

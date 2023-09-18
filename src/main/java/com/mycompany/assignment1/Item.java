@@ -17,17 +17,18 @@ package com.mycompany.assignment1;
    public static int id=1;
    public int idc;
    private int cost;
-   Item(String t)
+   Item(String t,int pc)
    {
       this.idc=id++;
        title=t;
+       popularityCount=pc;
       
    }
 
     Item() 
     {
        title="";
-       isBorrowed=true;
+       isBorrowed=false;
        popularityCount=0;
        cost=0;
        
@@ -57,7 +58,15 @@ package com.mycompany.assignment1;
    {
        return title;
    }
-   
+    public int getPopularityCount()
+    {
+        return popularityCount;
+    }
+
+    public void incrementPopularityCount()
+    {
+        popularityCount++;
+    }
    @Override
    public void displayInfo()
    {

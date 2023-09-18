@@ -10,4 +10,24 @@ package com.mycompany.assignment1;
  */
 public class Borrower {
     private String name;
+    public static int id=1;
+    public int  iddd;
+    Borrower(String n)
+    {
+        this.name=n;
+        iddd=id++;
+    }
+    public void setBorrower(String n)
+    {
+        this.name=n;
+    }
+    public String getBorrower()
+    {
+        return name;
+    }
+    public int getId()
+    {
+        return iddd;
+    }
+   
 }
