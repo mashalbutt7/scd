@@ -17,11 +17,12 @@ package com.mycompany.assignment1;
    public static int id=1;
    public int idc;
    private int cost;
-   Item(String t,int pc)
+   Item(String t,int pc,int cost)
    {
       this.idc=id++;
        title=t;
        popularityCount=pc;
+      this.cost=cost;
       
    }
 
@@ -32,6 +33,18 @@ package com.mycompany.assignment1;
        popularityCount=0;
        cost=0;
        
+    }
+    public int getid()
+    {
+        return idc;
+    }
+    public void setPrice(int p)
+    {
+        cost=p;
+    }
+    public int getPrice()
+    {
+        return cost;
     }
      public void setisborrowed(boolean tt)
    {
@@ -73,9 +86,10 @@ package com.mycompany.assignment1;
        
     
    }
-//   public int calculateCost()
-//   {
-//       return 0;
-//   }
+   @Override
+   public double calculateCost()
+   {
+      return 0;
+   }
 }
 

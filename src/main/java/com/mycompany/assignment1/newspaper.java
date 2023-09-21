@@ -19,7 +19,7 @@ class newspaper extends Item
 
    newspaper(String t,String p,Date d,int pc)
    {
-       super(t,pc);
+       super(t,pc,0);
        
        publisher=p;
        date=d;
@@ -48,5 +48,12 @@ class newspaper extends Item
           SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = dateFormat.format(date);
         System.out.println( "id:"+idc+" Title:" + title+"  "+"Authors:" +publisher+" "+"Date:"+formattedDate);
+     }
+    @Override
+     public final double calculateCost()
+     {
+         double publishercharge=5;
+         double s=publishercharge+10;
+         return s;
      }
 }

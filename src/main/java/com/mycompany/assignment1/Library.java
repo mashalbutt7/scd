@@ -77,7 +77,7 @@ public void borrowItem()
         addBorrower(borrowerName);
        System.out.print("Enter item title: ");
        String itemTitle = haha.nextLine();
-        Borrower borrower = findBorrowerByName(borrowerName);
+       Borrower borrower = findBorrowerByName(borrowerName);
         Item item = findItemByTitle(itemTitle);
      
          System.out.println(item);
@@ -107,7 +107,8 @@ public void borrowItem()
             item.setisborrowed(true);
             item.incrementPopularityCount();
             setBorrowedItem(item);
-        System.out.println(borrower.getBorrower() + " borrowed " + item.gettitle());
+            double u= item.calculateCost();
+            System.out.println(borrower.getBorrower() + " borrowed " + item.gettitle()+ " Cost: "+ u);
         }
         
         }
@@ -176,7 +177,9 @@ for (int i = 0; i < itemsList.size(); i++)
                 String a=objo.nextLine();
                 System.out.println("enter the year of book:");
                 int y=objo.nextInt();
-                Book bb=new Book(t,a,y,0);
+                System.out.println("Enter the cost of the book:");
+                int cc=objo.nextInt();
+                Book bb=new Book(t,a,y,0,cc);
                 itemsList.add(bb);
                 break;
             case 2:
@@ -202,7 +205,9 @@ for (int i = 0; i < itemsList.size(); i++)
                }
                 System.out.println("enter the publisher company of the magazine:");
                 String pc=objo.nextLine();
-                magazine mm=new magazine(mt,pc,authorss,0);
+                System.out.println("Enter the cost of the magazine:");
+                int hehe=objo.nextInt();
+                magazine mm=new magazine(mt,pc,authorss,0,hehe);
                 itemsList.add(mm);
                 
                
@@ -225,7 +230,7 @@ for (int i = 0; i < itemsList.size(); i++)
              } catch (ParseException e) {
             System.err.println("Invalid date format. Please use dd-MM-yyyy.");
         }
-               
+              
                 newspaper nn=new newspaper(nt,am,date,0);
                 itemsList.add(nn);
                 break;
@@ -259,6 +264,9 @@ for (int i = 0; i < itemsList.size(); i++)
                 book.setAuthor(input.nextLine());
                 System.out.println("Enter new year:");
                 book.setYear(input.nextInt());
+                System.out.println("Enter the cost of the book:");
+                item.setPrice(input.nextInt());
+                
                   
            }
            if(item instanceof newspaper)
@@ -282,7 +290,7 @@ for (int i = 0; i < itemsList.size(); i++)
             System.err.println("Invalid date format. Please use dd-MM-yyyy.");
         }
 
-                   
+            
                   
                       
 
@@ -313,7 +321,8 @@ for (int i = 0; i < itemsList.size(); i++)
                    m.setauthorsList(authorss);
                    System.out.println("Enter new Publishing Company:");
                    m.setPublisher(input.nextLine());
-                      
+                    System.out.println("Enter the cost of the magazine:");
+                item.setPrice(input.nextInt()); 
                
            }
            
@@ -340,7 +349,7 @@ for (int i = 0; i < itemsList.size(); i++)
             return true;
         }
     }
-    // Item with the specified ID was not found
+    
     System.out.println("No item with ID " + idd + " found.");
     return false;
 }
@@ -373,7 +382,7 @@ for (int i = 0; i < itemsList.size(); i++)
     {
         for(int i=0;i<itemsList.size();i++)
         {
-         Item item = itemsList.get(i);
+           Item item = itemsList.get(i);
            if (item.idc == id)
         {
             item.displayInfo();
@@ -412,7 +421,8 @@ for (int i = 0; i < itemsList.size(); i++)
                     String author=p[2];
                     int year=Integer.parseInt(p[3]);
                     int pc=Integer.parseInt(p[4]);
-                    Book b=new Book(title,author,year,pc);
+                    int cost=Integer.parseInt(p[5]);
+                    Book b=new Book(title,author,year,pc,cost);
                     itemsList.add(b);
                     
                 }
@@ -462,7 +472,8 @@ for (int i = 0; i < result.length(); i++)
        
                  String pu=p[count+2];
                  int pr=Integer.parseInt(p[count+3]);
-                 magazine m=new magazine(title,pu,author,pr);
+                 int cc=Integer.parseInt(p[count+4]);
+                 magazine m=new magazine(title,pu,author,pr,cc);
                  itemsList.add(m);
                  
               }
@@ -487,6 +498,7 @@ for (int i = 0; i < result.length(); i++)
             e.printStackTrace();
         }
                     int hii=Integer.parseInt(p[4]);
+                   
                     newspaper n=new newspaper(title,publisher,hi,hii);
                     itemsList.add(n);
                 }

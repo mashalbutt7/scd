@@ -16,9 +16,9 @@ class magazine extends Item
     
     private String publisher;
     private List<String>authorsList=new ArrayList<>();
-    magazine(String t,String p,List<String>a,int pc)
+    magazine(String t,String p,List<String>a,int pc,int c)
     {
-       super(t,pc);
+       super(t,pc,c);
        publisher=p;
        authorsList=a;
     }
@@ -44,5 +44,13 @@ class magazine extends Item
      {
          
         System.out.println( "id:"+idc+" Title:" + title+"  "+"Authors:" +authorsList +" "+"Publisher Company:"+publisher);
+     }
+    @Override
+     public final double calculateCost()
+     {
+         int hu=getPrice();
+         int yes=getPopularityCount();
+         double total=hu*yes;
+         return total;
      }
 }

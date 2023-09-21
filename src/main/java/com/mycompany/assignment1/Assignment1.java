@@ -25,14 +25,14 @@ public class Assignment1 {
         System.out.println();
         System.out.println();
         System.out.println("Library Management System Menu");
-        System.out.println("1.  Add Book");
-        System.out.println("2.  Edit Book");
-        System.out.println("3.  Delete Book");
-        System.out.println("4.  View All");
-        System.out.println("5.  View Book By ID");
-        System.out.println("6.  Hot Picks");
-         System.out.println("7. Borrow Items");
-          System.out.println("8.  Display the borrowers");
+        System.out.println("1.  Hot Picks");
+        System.out.println("2.  Borrow an Item");
+        System.out.println("3.  Add Item");
+        System.out.println("4.  Edit Item");
+        System.out.println("5.  Delete Item ");
+        System.out.println("6.  View All Items");
+         System.out.println("7.  View Item By ID");
+          System.out.println("8.  View Borrowers List");
            System.out.println("9.  Exit");
         System.out.println("Enter your choice:");
         s=  obj.nextInt();
@@ -43,12 +43,26 @@ public class Assignment1 {
         {
             case 1:
         {
-            lb.addItem();
+            System.out.println("Hot Picks:");
+            lb.displayHotPicks();
             break;
+           
         }
             case 2:
         {
-            System.out.println("Enter the id of book to edit");
+             lb.borrowItem();
+               break;
+           
+        }
+            case 3:
+        {
+             lb.addItem();
+            break;
+           
+        }
+            case 4:
+        {
+             System.out.println("Enter the id of book to edit");
           
             int y=obj.nextInt();
               System.out.println("Before editing");
@@ -57,22 +71,26 @@ public class Assignment1 {
             System.out.println("After editing");
           lb.displayonebook(y);
             break;
-        }
-            case 3:
-        {
-            System.out.println("Enter the id of book to delete:");
-            int x=obj.nextInt();
-            lb.deleteItem(x);
-            break;
-        }
-            case 4:
-        {
-            lb.displayallbooks();
-            break;
+           
         }
             case 5:
         {
-            System.out.println("enter the id you want to display:");
+             System.out.println("Enter the id of book to delete:");
+            int x=obj.nextInt();
+            lb.deleteItem(x);
+            break;
+          
+           
+   }
+            case 6:
+            {
+            lb.displayallbooks();
+            break;
+            }
+            case 7:
+            {  
+             
+             System.out.println("enter the id you want to display:");
          
              int ed=obj.nextInt();
              Item Display = null;
@@ -96,19 +114,6 @@ public class Assignment1 {
         System.out.println("Item with ID " + Display + " not found.");
     }
             break;
-           
-   }
-            case 6:
-            {
-                System.out.println("Hot Picks:");
-                lb.displayHotPicks();
-                break;
-            }
-            case 7:
-            {  
-              lb.borrowItem();
-               break;
-           
             }
             case 8:
             {

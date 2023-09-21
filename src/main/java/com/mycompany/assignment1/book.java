@@ -13,9 +13,9 @@ class Book extends Item
    
     private String author;
     private int year;
-    Book(String t,String a,int y,int pc)
+    Book(String t,String a,int y,int pc,int c)
     {
-         super(t,pc);
+         super(t,pc,c);
          this. author=a;
          this. year=y;
         
@@ -41,5 +41,12 @@ class Book extends Item
   public void displayInfo()
      {
         System.out.println( "id:"+idc+" Title: " + title+"  "+"Authors:" +author+" "+"Year:"+year);
+     }
+    @Override
+   public final double calculateCost()
+     { 
+         int iit=getPrice();
+         double total=200+(0.2*iit)+iit;
+         return total;
      }
 }
